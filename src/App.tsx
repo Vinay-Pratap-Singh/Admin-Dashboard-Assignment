@@ -1,6 +1,51 @@
+import { Chart as ChartJS, registerables } from "chart.js";
+import { Bar } from "react-chartjs-2";
 import Sidebar from "./components/Sidebar";
 
+ChartJS.register(...registerables);
+
 const App = () => {
+  const data = {
+    labels: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    datasets: [
+      {
+        label: "Monthly Earning",
+        data: [65, 59, 80, 81, 56, 55, 40, 20, 67, 92, 36, 48],
+        backgroundColor: ["#f2efff"],
+        borderColor: ["#f2efff"],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const options = {
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+      },
+      y: {
+        grid: {
+          display: false,
+        },
+      },
+    },
+  };
+
   return (
     <div>
       {/* sidebar */}
@@ -38,7 +83,7 @@ const App = () => {
         {/* for overview cards */}
         <div className="flex flex-wrap items-center justify-start gap-6">
           {/* earning card */}
-          <div className="flex items-center gap-3 px-2 py-5 bg-white rounded-md w-60">
+          <div className="flex items-center gap-3 px-2 py-5 bg-white rounded-md shadow-sm w-60">
             <div className="flex items-center justify-center p-5 bg-green-100 rounded-full w-fit">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +125,7 @@ const App = () => {
           </div>
 
           {/* orders card */}
-          <div className="flex items-center gap-3 px-2 py-5 bg-white rounded-md w-60">
+          <div className="flex items-center gap-3 px-2 py-5 bg-white rounded-md shadow-sm w-60">
             <div className="flex items-center justify-center p-5 bg-purple-100 rounded-full w-fit">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +167,7 @@ const App = () => {
           </div>
 
           {/* balance card */}
-          <div className="flex items-center gap-3 px-2 py-5 bg-white rounded-md w-60">
+          <div className="flex items-center gap-3 px-2 py-5 bg-white rounded-md shadow-sm w-60">
             <div className="flex items-center justify-center p-5 rounded-full bg-sky-100 w-fit">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -164,7 +209,7 @@ const App = () => {
           </div>
 
           {/* sales card */}
-          <div className="flex items-center gap-3 px-2 py-5 bg-white rounded-md w-60">
+          <div className="flex items-center gap-3 px-2 py-5 bg-white rounded-md shadow-sm w-60">
             <div className="flex items-center justify-center p-5 bg-red-100 rounded-full w-fit">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -203,6 +248,31 @@ const App = () => {
                 this week
               </p>
             </div>{" "}
+          </div>
+        </div>
+
+        {/* for overview bar and doughnut chart */}
+        <div className="flex items-center justify-between ">
+          {/* monthly overview */}
+          <div className="flex flex-col w-[60%] gap-5 p-5 bg-white rounded-md shadow-sm">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-lg font-bold">Overview</h2>
+                <p className="text-xs font-medium text-gray-400">
+                  Monthly Earning
+                </p>
+              </div>
+
+              <select className="p-1 text-xs font-medium text-gray-400 bg-gray-100 rounded-md">
+                <option>Montly</option>
+                <option>Quaterly</option>
+                <option>Half Yearly</option>
+                <option>Yearly</option>
+              </select>
+            </div>
+            <div className="h-60">
+              <Bar data={data} options={options} />
+            </div>
           </div>
         </div>
       </main>
