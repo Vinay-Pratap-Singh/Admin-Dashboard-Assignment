@@ -18,10 +18,12 @@ const App = () => {
       <Sidebar />
 
       {/* for right section */}
-      <main className="p-10 ml-60 bg-[#f5f6f8] space-y-10">
+      <main className="p-5 lg:p-10 lg:ml-60 bg-[#f5f6f8] space-y-10">
         {/* for header */}
-        <header className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold">Hello Vinay Pratap 👋</h3>
+        <header className="flex flex-col items-center justify-between gap-3 md:flex-row">
+          <h3 className="text-lg font-semibold md:pl-10 lg:pl-0">
+            Hello Vinay Pratap 👋
+          </h3>
           {/* search bar */}
           <div className="flex items-center gap-2 p-2 bg-white rounded-md">
             <svg
@@ -47,7 +49,7 @@ const App = () => {
         </header>
 
         {/* for overview cards */}
-        <div className="flex flex-wrap items-center justify-start gap-6">
+        <div className="flex flex-wrap items-center justify-center gap-6">
           {/* earning card */}
           <div className="flex items-center gap-3 px-2 py-5 bg-white rounded-md shadow-sm w-60">
             <div className="flex items-center justify-center p-5 bg-green-100 rounded-full w-fit">
@@ -218,9 +220,9 @@ const App = () => {
         </div>
 
         {/* for overview bar and doughnut chart */}
-        <div className="flex items-center justify-between ">
+        <div className="flex flex-col items-center justify-between gap-5 lg:gap-0 md:flex-row">
           {/* monthly overviewbar chart */}
-          <div className="flex flex-col w-[65%] gap-5 p-5 bg-white rounded-md shadow-sm">
+          <div className="overflow-x-scroll lg:overflow-hidden flex flex-col w-full md:w-[65%] gap-5 p-3 lg:p-5 bg-white rounded-md shadow-sm ">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-bold">Overview</h2>
@@ -236,34 +238,34 @@ const App = () => {
                 <option>Yearly</option>
               </select>
             </div>
-            <div className="h-72">
+            <div className="md:h-60 lg:h-auto">
               <Bar data={BarChartData} options={BarChartOptions} />
             </div>
           </div>
 
           {/* customers pie chart */}
-          <div className="flex flex-col w-[30%] gap-5 p-5 bg-white rounded-md shadow-sm">
+          <div className="flex flex-col self-stretch w-full md:w-[30%] gap-5 p-5 bg-white rounded-md shadow-sm">
             <div>
               <h2 className="text-lg font-bold">Customers</h2>
               <p className="text-xs font-medium text-gray-400">
                 Customers that buy products
               </p>
             </div>
-            <div className="flex items-start justify-center h-72">
+            <div className="flex items-start justify-center">
               <Doughnut data={PieChartData} options={PieChartOptions} />
             </div>
           </div>
         </div>
 
         {/* for product sell table */}
-        <div className="pb-5 space-y-5 bg-white rounded-md shadow-sm">
-          <head className="flex items-center justify-between p-5">
+        <div className="pb-5 space-y-3 bg-white rounded-md shadow-sm lg:space-y-5">
+          <head className="flex flex-col items-center justify-between gap-3 p-5 md:flex-row">
             <h2 className="text-lg font-bold">Product Sell</h2>
 
             {/* search and option */}
-            <div className="flex items-center gap-5">
+            <div className="flex flex-col items-center gap-2 lg:gap-5 md:flex-row">
               {/* search bar */}
-              <div className="flex items-center gap-2 p-2 text-gray-400 bg-gray-100 rounded-md">
+              <div className="flex items-center w-full gap-2 p-2 text-gray-400 bg-gray-100 rounded-md md:w-fit">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -286,7 +288,7 @@ const App = () => {
               </div>
 
               {/* for days count */}
-              <select className="p-2 text-sm font-medium text-gray-400 bg-gray-100 rounded-md">
+              <select className="w-full p-2 text-sm font-medium text-gray-400 bg-gray-100 rounded-md md:w-fit">
                 <option>30 days</option>
                 <option>Quater</option>
                 <option>Half Yearly</option>
@@ -295,51 +297,53 @@ const App = () => {
             </div>
           </head>
 
-          <table className="w-full">
-            <thead className="border-b-2 border-gray-100">
-              <tr>
-                <th className="p-2 pl-5 font-semibold text-left text-gray-400">
-                  Product Name
-                </th>
-                <th className="p-2 font-semibold text-gray-400">Stock</th>
-                <th className="p-2 font-semibold text-gray-400">Price</th>
-                <th className="p-2 pr-5 font-semibold text-gray-400">
-                  Total Sales
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {productData &&
-                productData.map((product, index) => {
-                  return (
-                    <tr key={index}>
-                      <td className="flex items-center gap-5 p-2 pl-5">
-                        <img
-                          src={product?.image}
-                          alt="product"
-                          className="w-20 h-16 p-1 rounded-md shadow-sm"
-                        />
-                        <div>
-                          <h4 className="font-semibold">{product?.title}</h4>
-                          <p className="text-sm text-gray-400">
-                            {product?.description}
-                          </p>
-                        </div>
-                      </td>
-                      <td className="p-2 text-sm font-medium">
-                        {product?.stocks} in stock
-                      </td>
-                      <td className="p-2 text-sm font-medium">
-                        ${product?.price}
-                      </td>
-                      <td className="p-2 pr-5 text-sm font-medium">
-                        {product?.totalSales}
-                      </td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
+          <div className="overflow-x-scroll xl:overflow-hidden ">
+            <table className="min-w-full table-auto w-[800px]">
+              <thead className="border-b-2 border-gray-100">
+                <tr>
+                  <th className="p-2 pl-5 font-semibold text-left text-gray-400">
+                    Product Name
+                  </th>
+                  <th className="p-2 font-semibold text-gray-400">Stock</th>
+                  <th className="p-2 font-semibold text-gray-400">Price</th>
+                  <th className="p-2 pr-5 font-semibold text-gray-400">
+                    Total Sales
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {productData &&
+                  productData.map((product, index) => {
+                    return (
+                      <tr key={index}>
+                        <td className="flex items-center gap-5 p-2 pl-5">
+                          <img
+                            src={product?.image}
+                            alt="product"
+                            className="w-20 h-16 p-1 rounded-md shadow-sm"
+                          />
+                          <div>
+                            <h4 className="font-semibold">{product?.title}</h4>
+                            <p className="text-sm text-gray-400 line-clamp-2">
+                              {product?.description}
+                            </p>
+                          </div>
+                        </td>
+                        <td className="w-40 p-2 text-sm font-medium text-center">
+                          {product?.stocks} in stock
+                        </td>
+                        <td className="p-2 text-sm font-medium text-center">
+                          ${product?.price}
+                        </td>
+                        <td className="w-32 p-2 pr-5 text-sm font-medium text-center">
+                          {product?.totalSales}
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </div>
         </div>
       </main>
     </div>
