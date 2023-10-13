@@ -1,51 +1,17 @@
 import { Chart as ChartJS, registerables } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Bar, Doughnut } from "react-chartjs-2";
 import Sidebar from "./components/Sidebar";
+import {
+  BarChartData,
+  BarChartOptions,
+  PieChartData,
+  PieChartOptions,
+  productData,
+} from "./utils/Data";
 
 ChartJS.register(...registerables);
 
 const App = () => {
-  const data = {
-    labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
-    datasets: [
-      {
-        label: "Monthly Earning",
-        data: [65, 59, 80, 81, 56, 55, 40, 20, 67, 92, 36, 48],
-        backgroundColor: ["#f2efff"],
-        borderColor: ["#f2efff"],
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const options = {
-    scales: {
-      x: {
-        grid: {
-          display: false,
-        },
-      },
-      y: {
-        grid: {
-          display: false,
-        },
-      },
-    },
-  };
-
   return (
     <div>
       {/* sidebar */}
@@ -253,8 +219,8 @@ const App = () => {
 
         {/* for overview bar and doughnut chart */}
         <div className="flex items-center justify-between ">
-          {/* monthly overview */}
-          <div className="flex flex-col w-[60%] gap-5 p-5 bg-white rounded-md shadow-sm">
+          {/* monthly overviewbar chart */}
+          <div className="flex flex-col w-[65%] gap-5 p-5 bg-white rounded-md shadow-sm">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-bold">Overview</h2>
@@ -270,10 +236,110 @@ const App = () => {
                 <option>Yearly</option>
               </select>
             </div>
-            <div className="h-60">
-              <Bar data={data} options={options} />
+            <div className="h-72">
+              <Bar data={BarChartData} options={BarChartOptions} />
             </div>
           </div>
+
+          {/* customers pie chart */}
+          <div className="flex flex-col w-[30%] gap-5 p-5 bg-white rounded-md shadow-sm">
+            <div>
+              <h2 className="text-lg font-bold">Customers</h2>
+              <p className="text-xs font-medium text-gray-400">
+                Customers that buy products
+              </p>
+            </div>
+            <div className="flex items-start justify-center h-72">
+              <Doughnut data={PieChartData} options={PieChartOptions} />
+            </div>
+          </div>
+        </div>
+
+        {/* for product sell table */}
+        <div className="pb-5 space-y-5 bg-white rounded-md shadow-sm">
+          <head className="flex items-center justify-between p-5">
+            <h2 className="text-lg font-bold">Product Sell</h2>
+
+            {/* search and option */}
+            <div className="flex items-center gap-5">
+              {/* search bar */}
+              <div className="flex items-center gap-2 p-2 text-gray-400 bg-gray-100 rounded-md">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  className="w-5 h-5 text-gray-500"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                  />
+                </svg>
+                <input
+                  type="text"
+                  placeholder="Search"
+                  className="text-sm bg-transparent outline-none"
+                />
+              </div>
+
+              {/* for days count */}
+              <select className="p-2 text-sm font-medium text-gray-400 bg-gray-100 rounded-md">
+                <option>30 days</option>
+                <option>Quater</option>
+                <option>Half Yearly</option>
+                <option>Yearly</option>
+              </select>
+            </div>
+          </head>
+
+          <table className="w-full">
+            <thead className="border-b-2 border-gray-100">
+              <tr>
+                <th className="p-2 pl-5 font-semibold text-left text-gray-400">
+                  Product Name
+                </th>
+                <th className="p-2 font-semibold text-gray-400">Stock</th>
+                <th className="p-2 font-semibold text-gray-400">Price</th>
+                <th className="p-2 pr-5 font-semibold text-gray-400">
+                  Total Sales
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {productData &&
+                productData.map((product, index) => {
+                  return (
+                    <tr key={index}>
+                      <td className="flex items-center gap-5 p-2 pl-5">
+                        <img
+                          src={product?.image}
+                          alt="product"
+                          className="w-20 h-16 p-1 rounded-md shadow-sm"
+                        />
+                        <div>
+                          <h4 className="font-semibold">{product?.title}</h4>
+                          <p className="text-sm text-gray-400">
+                            {product?.description}
+                          </p>
+                        </div>
+                      </td>
+                      <td className="p-2 text-sm font-medium">
+                        {product?.stocks} in stock
+                      </td>
+                      <td className="p-2 text-sm font-medium">
+                        ${product?.price}
+                      </td>
+                      <td className="p-2 pr-5 text-sm font-medium">
+                        {product?.totalSales}
+                      </td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
         </div>
       </main>
     </div>
