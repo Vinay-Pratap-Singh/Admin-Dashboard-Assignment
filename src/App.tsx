@@ -1,5 +1,12 @@
+import Sidebar from "./components/Sidebar";
+
 const App = () => {
-  return <div className="text-red-500">App</div>;
+  return (
+    <div>
+      {/* sidebar */}
+      <Sidebar />
+    </div>
+  );
 };
 
 export default App;
