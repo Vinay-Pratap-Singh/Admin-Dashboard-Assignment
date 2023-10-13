@@ -1,27 +1,20 @@
-# React + TypeScript + Vite
+# Admin Dashboard Assignment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> It is an assignment project
 
-Currently, two official plugins are available:
+This Admin Dashboard is a web application created using React, TypeScript, Tailwind CSS, and Chart.js for interactive data visualization. It is designed to provide an efficient way to monitor and manage various aspects of your system or application.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- Interactive data visualization using Chart.js and React Chart.
+- Responsive design for a seamless experience on various devices.
+- Simple cards for displaying key metrics.
+- Sidebar for better navigation.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies Used
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- **React**: A popular JavaScript library for building user interfaces.
+- **TypeScript**: A statically typed superset of JavaScript.
+- **Tailwind CSS**: A utility-first CSS framework.
+- **Chart.js**: A JavaScript library for creating charts and graphs.
+- **React Chart**: To utilize chart js to create charts in react.
